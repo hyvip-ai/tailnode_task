@@ -7,16 +7,18 @@ interface TodoCardProps {
   todo: Todo;
   completeTodo: (todo: Todo) => void;
   setFilterWord: (filterWord: string) => void;
+  filterWords:string[]
 }
 
 const TodoCard: React.FC<TodoCardProps> = ({
   todo,
   completeTodo,
   setFilterWord,
+  filterWords
 }) => {
   const clickHandler = (e: any) => {
     if (e.srcElement.nodeName === 'SPAN') {
-      setFilterWord(e.srcElement.className.toLowerCase());
+      setFilterWord(e.srcElement.id.trim().toLowerCase());
     } else {
       if (!todo.completed) {
         completeTodo(todo);
@@ -38,7 +40,11 @@ const TodoCard: React.FC<TodoCardProps> = ({
     <div className='card' ref={cardRef}>
       <p>
         {reactStringReplace(todo.title, /#(\w+)/g, (match) => (
-          <span key={uuid()} className={`${match}`}>
+          <span
+            key={uuid()}
+            id={match}
+            className={`${filterWords.includes(match.toLowerCase()) ? 'highlight' : ''}`}
+          >
             #{match}
           </span>
         ))}

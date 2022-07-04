@@ -76,6 +76,7 @@ function App() {
             key={item.id}
             completeTodo={completeTodo}
             setFilterWord={setFilterWord}
+            filterWords={filterWords}
           />
         ))}
       </div>
@@ -88,6 +89,7 @@ function App() {
                 key={item.id}
                 completeTodo={completeTodo}
                 setFilterWord={setFilterWord}
+                filterWords={filterWords}
               />
             ))
           : null}
